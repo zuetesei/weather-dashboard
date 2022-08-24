@@ -5,6 +5,7 @@ var today = moment().format('L');
 
 var searchInput = document.querySelector("#search-input");
 var searchForm = document.querySelector("#search-form");
+// var listCity = document.querySelector (".list-group-item");
 var cityName = document.querySelector("#city-name");
 var cityTemp = document.querySelector("#city-temp");
 var cityWind = document.querySelector("#city-wind");
@@ -28,13 +29,6 @@ function fetchCoords(search) {
         $("#city-name").append(cityName);
     });
 }
-
-function handleSearchForm(e) {
-    e.preventDefault()
-    var cityName = searchInput.value.trim()
-    fetchCoords(cityName) 
-}
-
 function fetchWeather(coord) {
     var {lat} = coord 
     var {lon} = coord  
@@ -45,13 +39,12 @@ function fetchWeather(coord) {
     .then((response) => response.json())
     .then((data) => { console.log(data) 
 
-        // current city weather conditions 
+        // Display current city weather conditions 
         cityTemp.innerHTML = `Temp: ${data.current.temp} °F`;
         cityWind.innerHTML = `Wind: ${data.current.wind_speed} MPH`;
         cityHumid.innerHTML = `Humidity: ${data.current.humidity} %`;
-        // cityUv.innerHTML = `UV Index: ${data.current.uvi}`;
 
-        // uvi index 
+        // Display current city uvi 
         var uvIndex = data.current.uvi;
         var uvIndexInfo = $(`
             <p> UV Index: 
@@ -60,54 +53,81 @@ function fetchWeather(coord) {
         `);
 
         $("#city-weather").append(uvIndexInfo)
-
-        if (uvIndex >= 0 && uvIndex <= 2) {
-            $("#uvIndexColor").css("background-color", "#3EA72D").css("color", "white");
-        } else if (uvIndex >= 3 && uvIndex <= 5) {
-            $("#uvIndexColor").css("background-color", "#FFF300");
+        
+        // Uvi index: 0-5 low risk green#72f05d, 6-7 moderate orange#e09936, 8-10 high risk red#eb2902, 11+ very high risk purple#8a2173
+        if (uvIndex >= 0 && uvIndex <= 5) {
+            $("#uvIndexColor").css("background-color", "#72f05d").css("color", "white");
         } else if (uvIndex >= 6 && uvIndex <= 7) {
-            $("#uvIndexColor").css("background-color", "#F18B00");
+            $("#uvIndexColor").css("background-color", "#e09936");
         } else if (uvIndex >= 8 && uvIndex <= 10) {
-            $("#uvIndexColor").css("background-color", "#E53210").css("color", "white");
+            $("#uvIndexColor").css("background-color", "#eb2902").css("color", "white");
         } else {
-            $("#uvIndexColor").css("background-color", "#B567A4").css("color", "white"); 
+            $("#uvIndexColor").css("background-color", "#8a2173").css("color", "white"); 
         }; 
 
-        // render five day forecast 
+        var futureCardTitle = $(`
+        <h3> Five Day Forecast: </h3>
+        `);
+
+        $("#forecast-title").append(futureCardTitle)
+
+
+        // Display five day forecast 
         for (let i = 1; i < 6; i++) {
             var cityInfo = {
                 date: data.daily[i].dt,
                 icon: data.daily[i].weather[0].icon,
                 temp: data.daily[i].temp.day,
+                wind: data.daily[i].wind_speed,
                 humidity: data.daily[i].humidity
             };
             
             var currentDate = moment.unix(cityInfo.date).format("MM/DD/YYYY");
             var iconURL = `<img src="https://openweathermap.org/img/w/${cityInfo.icon}.png"`
     
+
             var futureCard = $(`
             <div class="pl-3">
-                <div class="card pl-3 pt-3 mb-3 bg-primary text-light">
+                <div class="card pl-3 pt-3 mb-3 bg-light text-dark">
                     <div class="card-body"> 
                         <h5> ${currentDate}</h5> 
                         <p> ${iconURL} </p>
                         <p> Temp: ${cityInfo.temp} °F</p>
+                        <p> Wind: ${cityInfo.wind} MPH </p>
                         <p> Humidity: ${cityInfo.humidity}\%</p>
                     </div> 
                 </div>
             </div> 
-        `);
+            `);
     
         $("#five-day-forecast").append(futureCard);
         }
     });
 }
+function handleSearchForm(e) {
+    e.preventDefault()
+    var cityName = searchInput.value.trim()
+    fetchCoords(cityName) ;
 
-function displaySearchHistory() {
-    // pulls localStorage results 
+    if(!recentCitySearchArr.includes(cityName)) {
+        recentCitySearchArr.push(cityName);
+        var searchedCity = $(`
+            <li class="list-group-item">${cityName}</li>
+        `);
+        $("#search-history").append(searchedCity);
+    };
 
-    // pass in data 
-}
+    localStorage.setItem("city", JSON.stringify(recentCitySearchArr));
+    console.log(recentCitySearchArr);
+};
 
 searchForm.addEventListener("submit", handleSearchForm)
+
+
+// WHEN I click on a city in the search history
+// THEN I am again presented with current and future conditions for that city
+$(document).on("click", ".list-group-item", function() {
+    var listCity = $(this).text();
+    fetchWeather(listCity);
+});
 
