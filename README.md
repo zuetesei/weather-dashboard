@@ -1,9 +1,11 @@
 # Weather Dashboard
 
 ## Description
+
 This is a simple calendar application that allows users to save events at each hour of the day.
 
 ### Acceptance Criteria
+
 GIVEN a weather dashboard with form inputs
 WHEN I search for a city
 THEN I am presented with current and future conditions for that city and that city is added to the search history ✓
@@ -17,10 +19,11 @@ WHEN I click on a city in the search history
 THEN I am again presented with current and future conditions for that city
 
 ## Built With
-* HTML
-* CSS / Bootstrap
-* JavaScript
-* jQuery
+
+- HTML
+- CSS / Bootstrap
+- JavaScript
+- jQuery
 
 ## Link to Application
 
@@ -28,8 +31,11 @@ THEN I am again presented with current and future conditions for that city
 
 ### Made with ♥ by Zue.
 
+Need help to:
 
-Need help to: 
-- Clearing weather when searching for new city 
 - Clicking on search history will pull up weather again
-- Get icon for current city 
+- Get icon for current city
+
+Final steps:
+
+- Styling and turn in tomorrow (Thursday before class)
