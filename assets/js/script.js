@@ -4,10 +4,8 @@ var baseUrl = "http://api.openweathermap.org";
 var today = moment().format("L");
 
 var currentWeatherEl = document.querySelector("#city-weather");
-
 var searchInput = document.querySelector("#search-input");
 var searchForm = document.querySelector("#search-form");
-
 var recentCitySearchArr = [];
 
 function fetchCoords(search) {
@@ -124,7 +122,6 @@ function handleSearchForm(e) {
   $("#forecast-title").empty();
   $("#five-day-forecast").empty();
   $("#city-weather").empty();
-
   e.preventDefault();
 
   var cityName = searchInput.value.trim();
