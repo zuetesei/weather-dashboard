@@ -1,6 +1,6 @@
 // Define Variables
 var apiKey = "fce6bd9d569c80c55e49fc3d9cabf2fe";
-var baseUrl = "http://api.openweathermap.org";
+var baseUrl = "https://api.openweathermap.org";
 var today = moment().format("L");
 
 var currentWeatherEl = document.querySelector("#city-weather");
