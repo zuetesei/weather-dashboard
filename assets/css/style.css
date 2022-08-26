@@ -1,13 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;500&family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;600&display=swap');
 
 *{
     box-sizing: border-box; 
     margin: 0;
     padding: 0;
-    font-family: "Poppins",sans-serif;
+    font-family: "Oswald",sans-serif;
+}
+.navbar {
+    background-color: #BDD1E3;
+    width: 100%;
 }
 h1 {
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 1px;
 }
 h2 {
@@ -16,9 +21,17 @@ h2 {
 }
 h3 {
     font-size: 22px;
-    font-weight: 500;
+    font-weight: 600;
     text-transform: uppercase;
+}
+p {
+    font-weight: 300;
 }
 button {
     width: 98%;
+    text-transform: uppercase;
 }
+.five-day-forecast {
+    margin-left: 5px;
+}
+

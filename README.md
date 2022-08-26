@@ -31,9 +31,13 @@ THEN I am again presented with current and future conditions for that city
 
 ### Made with ♥ by Zue.
 
+Contributions from:
+
+- Tutor Dan Sires
+- TAs Chris Song, Wesley Tran, Michael Nguyen
+
 Need help to:
 
-- Clicking on search history will pull up weather again
 - Get icon for current city
 
 Final steps:
