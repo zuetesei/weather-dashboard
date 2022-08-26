@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a simple calendar application that allows users to save events at each hour of the day.
+This is a ....
 
 ### Acceptance Criteria
 
@@ -27,19 +27,10 @@ THEN I am again presented with current and future conditions for that city
 
 ## Link to Application
 
+https://zuetesei.github.io/weather-dashboard/
+
 ## Screenshots
 
 ### Made with ♥ by Zue.
 
-Contributions from:
-
-- Tutor Dan Sires
-- TAs Chris Song, Wesley Tran, Michael Nguyen
-
-Need help to:
-
-- Get icon for current city
-
-Final steps:
-
-- Styling and turn in tomorrow (Thursday before class)
+Noteworthy Contributions from Dan Sires, Chris Song, Wesley Tran, Michael Nguyen, & Jacob Carver.

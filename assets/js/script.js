@@ -54,13 +54,13 @@ function fetchWeather(coord) {
       `);
 
       var cityTemp = document.createElement("p");
-      cityTemp.innerHTML = `Temperature: ${data.current.temp} °F`;
+      cityTemp.innerHTML = `Temperature:  ${data.current.temp} °F`;
 
       var cityWind = document.createElement("p");
-      cityWind.innerHTML = `Wind Speed: ${data.current.wind_speed} MPH`;
+      cityWind.innerHTML = `Wind Speed:  ${data.current.wind_speed} MPH`;
 
       var cityHumid = document.createElement("p");
-      cityHumid.innerHTML = `Humidity: ${data.current.humidity} %`;
+      cityHumid.innerHTML = `Humidity:  ${data.current.humidity} %`;
 
       var uvIndexP = document.createElement("p");
       var uvIndex = document.createElement("span");
@@ -160,14 +160,21 @@ function handleSearchForm(e) {
   }
 
   localStorage.setItem("city", JSON.stringify(recentCitySearchArr));
+
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i)
+    const data = localStorage.getItem(key)
+    console.log(`${key} - ${data}`)
+}
+
   console.log(recentCitySearchArr);
 }
 
 searchForm.addEventListener("submit", handleSearchForm);
 
+
 // $(document).ready(function () {
 //   var searchHistory = JSON.parse(localStorage.getItem("city"));
-//   console.log(searchHistory);
 
 //   if (searchHistoryArr !== null) {
 //     var lastSearchedIndex = searchHistory.length - 1;
