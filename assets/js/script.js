@@ -7,11 +7,6 @@ var currentWeatherEl = document.querySelector("#city-weather");
 
 var searchInput = document.querySelector("#search-input");
 var searchForm = document.querySelector("#search-form");
-var cityName = document.querySelector("#city-name");
-var cityTemp = document.querySelector("#city-temp");
-var cityWind = document.querySelector("#city-wind");
-var cityHumid = document.querySelector("#city-humidity");
-var cityUv = document.querySelector("#city-uv-index");
 
 var recentCitySearchArr = [];
 
@@ -35,12 +30,6 @@ function fetchWeather(coord) {
     .then(response => response.json())
     .then(data => {
       console.log(data);
-
-      // error handling?
-      if (data.length === 0) {
-        currentWeatherEl.textContent = "This is not a city name!";
-        return;
-      }
 
       // Display current city weather conditions
       var cityName = document.createElement("h1");
@@ -160,26 +149,21 @@ function handleSearchForm(e) {
   }
 
   localStorage.setItem("city", JSON.stringify(recentCitySearchArr));
-
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i)
-    const data = localStorage.getItem(key)
-    console.log(`${key} - ${data}`)
-}
-
-  console.log(recentCitySearchArr);
 }
 
 searchForm.addEventListener("submit", handleSearchForm);
 
 
-// $(document).ready(function () {
-//   var searchHistory = JSON.parse(localStorage.getItem("city"));
-
-//   if (searchHistoryArr !== null) {
-//     var lastSearchedIndex = searchHistory.length - 1;
-//     var lastSearchedCity = searchHistory[lastSearchedIndex];
-//     fetchCoords(lastSearchedCity);
-//     console.log(`Last searched city: ${lastSearchedCity}`);
-//   }
-// });
+$(document).ready(function () {
+  var searchHistory = JSON.parse(localStorage.getItem("city"));
+  
+  if (recentCitySearchArr !== null) {
+    var lastSearchedIndex = searchHistory.length - 1;
+    var lastSearchedCity = searchHistory[lastSearchedIndex];
+    fetchCoords(lastSearchedCity); 
+  }
+  for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i)
+    const data = localStorage.getItem(key)
+}
+});
